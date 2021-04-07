@@ -11,7 +11,7 @@ class opener:
         subprocess.Popen(self.directory)
         print('Abriendo ' + self.name)
 
-chrome = opener(r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe', 'Google Chrome')
+chrome = opener(r'C:\Program Files\Google\Chrome\Application\chrome.exe', 'Google Chrome')
 vs = opener(r'C:\Users\Giuliano\AppData\Local\Programs\Microsoft VS Code\code.exe', 'Visual Studio Code')
 eclipse = opener(r'C:\Program Files\Eclipse\eclipse\eclipse.exe', 'Eclipse')
 spotify = opener(r'C:\Users\Giuliano\AppData\Roaming\Spotify\Spotify.exe', 'Spotify')

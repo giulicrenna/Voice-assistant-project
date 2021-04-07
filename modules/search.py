@@ -3,6 +3,16 @@ import os, sys
 import time
 import pyttsx3
 
+def error_log2(exception_):
+    named = time.localtime() 
+    time_string = time.strftime("%m-%d-%Y_%H-%M", named)
+    path = r'logs' # to logs folder
+    file_name = 'error_log_%s.txt'%time_string
+    file = os.path.join(path, file_name)
+    file = open(file, "a") # creates the new file if not exists
+    file.write(str(exception_))  # write the exception on the new file 
+    file.close()
+
 class Argsearch1:
     def __init__(self, arg):
         self.arg = arg
@@ -15,7 +25,8 @@ class Argsearch1:
             engine.say(inf)
             #engine.runAndWait()
             input()
-        except:
+        except Exception as e:
+            error_log2(e)
             print('No hay coincidencia de busqueda')
             time.sleep(4)
 
@@ -33,7 +44,8 @@ class Argsearch2:
             engine.say(inf)
             #engine.runAndWait()
             input()
-        except:
+        except Exception as e:
+            error_log2(e)
             print('No hay coincidencia de busqueda')
             time.sleep(4)
 
@@ -52,7 +64,8 @@ class Argsearch3:
             engine.say(inf)
             #engine.runAndWait()
             input()
-        except:
+        except Exception as e:
+            error_log2(e)
             print('No hay coincidencia de busqueda')
             time.sleep(4)
 
@@ -72,7 +85,8 @@ class Argsearch4:
             engine.say(inf)
             #engine.runAndWait()
             input()
-        except:
+        except Exception as e:
+            error_log2(e)
             print('No hay coincidencia de busqueda')
             time.sleep(4)
 
@@ -93,7 +107,8 @@ class Argsearch5:
             engine.say(inf)
             #engine.runAndWait()
             input()
-        except:
+        except Exception as e:
+            error_log2(e)
             print('No hay coincidencia de busqueda')
             time.sleep(4)
 
@@ -115,7 +130,8 @@ class Argsearch6:
             engine.say(inf)
             #engine.runAndWait()
             input()
-        except:
+        except Exception as e:
+            error_log2(e)
             print('No hay coincidencia de busqueda')
             time.sleep(4)
 
@@ -138,8 +154,8 @@ class Argsearch7:
             engine.say(inf)
             #engine.runAndWait()
             input()
-        except:
+        except Exception as e:
+            error_log2(e)
             print('No hay coincidencia de busqueda')
             time.sleep(4)
-
 

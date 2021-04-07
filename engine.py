@@ -3,6 +3,7 @@ import pyttsx3
 import subprocess
 import os
 import sys
+import time
 from opener import *
 from notes import *
 import random
@@ -22,6 +23,15 @@ owner = 'giuli'
 
 actual_path = os.getcwd()
 
+def error_log(exception_):
+    named = time.localtime() 
+    time_string = time.strftime("%m-%d-%Y_%H-%M", named)
+    path = r'logs' # to logs folder
+    file_name = 'error_log_%s.txt'%time_string
+    file = os.path.join(path, file_name)
+    file = open(file, "a") # creates the new file if not exists
+    file.write(str(exception_))  # write the exception on the new file 
+    file.close()
 def ambient_adjustement():
     with sr.Microphone() as source:
         recognizer.dynamic_energy_threshold = False
@@ -202,7 +212,8 @@ def _orders_():
             engine.say(jk_read)
             engine.runAndWait()
     except Exception as ex:
-        print(ex)    
+        error_log(ex)
+        _welcome_()
 def initial_voice():   
     pre_build = open(os.getcwd() + r'\libs\pre_build_sentences.txt')
     sentences = pre_build.readlines()
@@ -220,7 +231,8 @@ def _welcome_():                                                            #FUN
             recognizer.adjust_for_ambient_noise(source, duration=1)
             initial_audio = recognizer.listen(source, timeout=6)        
         except Exception as ex:
-            print(ex)
+            error_log(ex)
+            _welcome_()
         try:
             open_command = recognizer.recognize_google(initial_audio, language="es-ES")
             ls_ = open_command.split(" ")
@@ -236,7 +248,8 @@ def _welcome_():                                                            #FUN
                 ambient_adjustement()
                 initial_voice()
         except Exception as ex:
-            print(ex)
+            error_log(ex)
+            _welcome_()
 
 while 1:
     _welcome_()
