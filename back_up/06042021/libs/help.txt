@@ -1,0 +1,12 @@
+
+VOICE_COMMAND           TEXT_COMMAND                                ARGUMENT
+
+abrir                                                               <Program name> configure paths in op_path.json
+cerrar
+adios
+nos vemos
+                        hacer anotación                             Note name + Note 
+                        eliminar anotación                          Note id
+                        eliminar todas las anotaciones              
+                        mostrar todas las anotaciones                   
+buscar * en wikipedia                                               * What you want to search
