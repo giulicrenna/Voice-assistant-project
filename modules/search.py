@@ -23,7 +23,7 @@ class Argsearch1:
             print(inf)
             engine = pyttsx3.init()
             engine.say(inf)
-            #engine.runAndWait()
+            engine.runAndWait()
             input()
         except Exception as e:
             error_log2(e)
@@ -42,7 +42,7 @@ class Argsearch2:
             print(inf)
             engine = pyttsx3.init()
             engine.say(inf)
-            #engine.runAndWait()
+            engine.runAndWait()
             input()
         except Exception as e:
             error_log2(e)
@@ -62,7 +62,8 @@ class Argsearch3:
             print(inf)
             engine = pyttsx3.init()
             engine.say(inf)
-            #engine.runAndWait()
+            engine.runAndWait()
+            engine.runAndWait()
             input()
         except Exception as e:
             error_log2(e)
@@ -83,7 +84,7 @@ class Argsearch4:
             print(inf)
             engine = pyttsx3.init()
             engine.say(inf)
-            #engine.runAndWait()
+            engine.runAndWait()
             input()
         except Exception as e:
             error_log2(e)
@@ -104,8 +105,9 @@ class Argsearch5:
             sentences=7)
             print(inf)
             engine = pyttsx3.init()
-            engine.say(inf)
-            #engine.runAndWait()
+            inf = str(inf)
+            engine.say('{}'.format(inf))
+            engine.runAndWait()
             input()
         except Exception as e:
             error_log2(e)
@@ -128,7 +130,7 @@ class Argsearch6:
             print(inf)
             engine = pyttsx3.init()
             engine.say(inf)
-            #engine.runAndWait()
+            engine.runAndWait()
             input()
         except Exception as e:
             error_log2(e)
@@ -152,7 +154,7 @@ class Argsearch7:
             print(inf)
             engine = pyttsx3.init()
             engine.say(inf)
-            #engine.runAndWait()
+            engine.runAndWait()
             input()
         except Exception as e:
             error_log2(e)
