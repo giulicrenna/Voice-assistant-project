@@ -8,6 +8,7 @@ from opener import *
 from notes import *
 import random
 from modules.search import *
+import enviroment
 
 n = random.randint(140,160)
 
@@ -22,6 +23,11 @@ recognizer = sr.Recognizer()
 owner = 'giuli'
 
 actual_path = os.getcwd()
+
+
+
+
+
 
 def error_log(exception_):
     named = time.localtime() 
@@ -250,6 +256,6 @@ def _welcome_():                                                            #FUN
         except Exception as ex:
             error_log(ex)
             _welcome_()
-
 while 1:
     _welcome_()
+    enviroment.enviroment()
