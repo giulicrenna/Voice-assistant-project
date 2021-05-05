@@ -7,7 +7,7 @@ import time
 from opener import *
 from notes import *
 import random
-from modules.search import *
+from modules import *
 import enviroment
 
 n = random.randint(140,160)
