@@ -1,0 +1,6 @@
+pyttsx3
+SpeechRecognition
+pandas
+wikipedia
+pyaudio
+tk
