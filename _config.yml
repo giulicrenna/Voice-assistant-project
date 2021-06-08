@@ -1,15 +1,6 @@
 # Site settings
 title: Voice assistant project
 email: giulicrenna@gmail.com
-description: >
-  A blog on programming, GNU Linux/Unix and other things I might find interesting.
-  I like to learn and teach and writing about what I learn is a great way to do both.
-  This blog is running Jekyll
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://eeemil.se" # the base hostname & protocol for your site
-
-# Build settings
-markdown: kramdown
 
 theme: jekyll-theme-hacker
 show_downloads: true
