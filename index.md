@@ -2,7 +2,9 @@
 ## SANTI
 
 SANTI is an open source assistant multipurpose, wich can process the languaje in an easy and natural way.
+
 It has been created as a "last project" for my last high school year, SANTI was proposed as a modular software where you can modified it for you personal use.
+
 For example, SANTI can be modified for being used with an Arduino for create a system that can open/close windows, swich on/off lights, relays, fans, etc.
 
 ### Markdown
