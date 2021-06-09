@@ -1,8 +1,9 @@
-## Welcome to GitHub Pages
+## Voice assistant project 
+## SANTI
 
-You can use the [editor on GitHub](https://github.com/giulicrenna/Voice-assistant-project/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+SANTI is an open source assistant multipurpose, wich can process the languaje in an easy and natural way.
+It has been created as a "last project" for my last high school year, SANTI was proposed as a modular software where you can modified it for you personal use.
+For example, SANTI can be modified for being used with an Arduino for create a system that can open/close windows, swich on/off lights, relays, fans, etc.
 
 ### Markdown
 
