@@ -66,6 +66,9 @@ class Notes():
             error_log2(error)
 
 
+n = Notes("hola", '1', '9')
+n.add_note()
+
 conn = sqlite3.connect('notes_db.s3db')
 cursor = conn.cursor()
 select_ = cursor.execute("SELECT * FROM notes")
