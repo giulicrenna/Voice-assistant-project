@@ -3,4 +3,4 @@ SpeechRecognition
 pandas
 wikipedia
 pyaudio
-tk
+python-weather

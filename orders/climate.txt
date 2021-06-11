@@ -1,0 +1,10 @@
+dar el clima
+cuantos grados hace
+que temperatura hace
+como esta el clima
+como esta el cielo
+dime la temperatura
+dime el clima
+decime la temperatura
+decime el clima
+dar pronostico

@@ -1,0 +1,8 @@
+eliminar anotacion
+eliminar anotaciones
+borrar nota
+borrar notas
+deshacer nota
+desahcer anotaciones
+suprimir nota
+suprimir anotaciones

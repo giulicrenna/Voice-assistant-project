@@ -1,0 +1,4 @@
+eliminar todas las anotaciones
+borrar todas las notas
+desahcer todas las anotaciones
+suprimir todas las anotaciones

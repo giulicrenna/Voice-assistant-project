@@ -1,17 +1,27 @@
 import speech_recognition as sr
 import pyttsx3
-import subprocess
+#import subprocess
 import os
 import sys
 import time
-from opener import *
-#from notes import *
-import random
-from modules.search import *
 import re
-from unidecode import unidecode 
+import unidecode 
+from modules import opener
+from modules import notes
+from modules import ex_handler
+from modules import reader
+from modules.reader import reader
+from modules.search import *
+from modules import climate
+import random
+
+owner = 'giuli'
+
+
 
 n = random.randint(140, 160)
+
+actual_path = os.getcwd()
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
@@ -19,21 +29,8 @@ engine.setProperty('rate', n)
 engine.setProperty('volume', 1)
 recognizer = sr.Recognizer()
 
-owner = 'giuli'
-
-actual_path = os.getcwd()
-
-
-def error_log(exception_):
-    named = time.localtime()
-    time_string = time.strftime("%m-%d-%Y_%H-%M", named)
-    path = r'logs'  # to logs folder
-    file_name = 'error_log_%s.txt' % time_string
-    file = os.path.join(path, file_name)
-    file = open(file, "a")  # creates the new file if not exists
-    file.write(str(exception_))  # write the exception on the new file
-    file.close()
-
+def cleaner():
+    os.system('cls')
 
 def ambient_adjustement():
     with sr.Microphone() as source:
@@ -46,28 +43,22 @@ def ambient_adjustement():
         engine.say(sentence)         # Implement pre build sentences
         engine.runAndWait()
         recognizer.adjust_for_ambient_noise(source, duration=2)
-
-
-def cleaner():
-    os.system('cls')
-
-
-def reader(file):
-    file_ = open(r'orders/{}'.format(file), 'r')
-    line = file_.readlines()
-    line = list(map(lambda l: l.rstrip('\n'), line)) #This line strip all \n in the element from the list
-    return line
-
-
+def list_to_str(list_):
+    empty = ""
+    for i in list_:
+        empty += i
+    return empty
 
 
 def _orders_():
     with sr.Microphone() as source:
-        recorded_audio = recognizer.listen(source, timeout=5)
+        recorded_audio = recognizer.listen(source, timeout=3)
     try:
+        cleaner()
         order_ = recognizer.recognize_google(recorded_audio, language="es-Es")
         order_ = re.sub(r'[^\w\s]', '', str(order_))  #Mistake was not converting the order from a list  to a string
         order = order_.lower()
+        order = unidecode.unidecode(order)
         print(order)
         for i in reader('insult.txt'):
             if i in order:
@@ -76,11 +67,131 @@ def _orders_():
                 break
             else:
                 pass
+        for i in reader('close.txt'):
+            if i in order:
+                cleaner()
+                pre_build = open(os.getcwd() + r'\libs\pre_build_sentences.txt')
+                sentence = pre_build.readlines()
+                sentence = sentence[random.randint(19, 25)]
+                engine.say(sentence)
+                engine.runAndWait()
+                sys.exit()
+        for i in reader('notes.txt'):  #Terminar notes
+            #res = any(x in i for x in order_)
+            if i in order:
+                engine.say('Abriendo anotador')
+                engine.runAndWait()
+                engine.say('Escriba el nombre de la nota')
+                engine.runAndWait()
+                name_ = input('>> ')
+                engine.say('Escriba la nota')
+                engine.runAndWait()
+                note_ = input('>> ')
+                new_note = notes.Notes(note_, name_)
+                new_note.add_note()
+                engine.say('Nota agregada exitosamente')
+                engine.runAndWait()
+                cleaner()
+        for i in reader('notes_delete.txt'):
+            if i in order:
+                engine.say('Escriba el nombre de la nota a borrar')
+                engine.runAndWait()
+                id_ = input('>> ')
+                erase_note = notes.Notes('', id_) 
+                erase_note.erase_notes()
+                engine.say('Anotación borrada exitosamente')
+                cleaner()
+        for i in reader('notes_delete_all.txt'):
+            if i in order:
+                engine.say('Escriba si, si estás seguro de elimiar todo')
+                engine.runAndWait()
+                print('Escriba si, si estás seguro de elimiar todo')
+                bool = input('>> ')
+                bool.lower()
+                if bool == 'si':
+                    erase_all = notes.Notes('', '')
+                    erase_all.erase_all()
+                    engine.say('Notas borradas con éxito')
+                    engine.runAndWait()
+                elif bool == 'no':
+                    engine.say('Saliendo de notas')
+                    engine.runAndWait()
+                    initial_voice()
+                else:
+                    engine.say('argumento incorrecto')
+                    engine.runAndWait()
+                    initial_voice()
+                cleaner()
+        for i in reader('notes_show_all.txt'):
+            if i in order:
+                engine.say('Mostrando todas las notas')
+                engine.runAndWait()
+                all_notes = notes.Notes('', '')
+                all_notes.show_notes()
+                print('\nPresiona enter para salir. ')
+                input('>> ')
+                cleaner()
+        for i in reader('climate.txt'):
+            if i in order:
+                engine.say("Por favor escribe la ciudad")
+                engine.runAndWait()
+                city = input(">> ")
+                weather = climate.Weather(city)
+                weather = weather.get_weather()
+                print(weather)
+                engine.say(weather)
+                engine.runAndWait()
+                time.sleep(3)
+                cleaner()
+        for i in reader('search.txt'):
+            order = order.replace('de ', '', 1)
+            order = order.replace('es ', '', 1)
+            order = order.split(" ")
+            print(order)
+            time.sleep(5)
+            if i in order:
+                if len(order) == 2:
+                    engine.say('buscando')
+                    engine.runAndWait()
+                    search = Argsearch1(order[1])
+                    search.search()
+                elif len(order) == 3:
+                    engine.say('buscando')
+                    engine.runAndWait()
+                    search = Argsearch2(order[1], order[2])
+                    search.search()
+                elif len(order) == 4:
+                    engine.say('buscando')
+                    engine.runAndWait()
+                    search = Argsearch3(order[1], order[2], order[3])
+                    search.search()
+                elif len(order) == 5:
+                    engine.say('buscando')
+                    engine.runAndWait()
+                    search = Argsearch4(order[1], order[2], order[3], order[4])
+                    search.search()
+                elif len(order) == 6:
+                    engine.say('buscando')
+                    engine.runAndWait()
+                    search = Argsearch5(order[1], order[2], order[3], order[4], order[5])
+                    search.search()
+                elif len(order) == 7:
+                    engine.say('buscando')
+                    engine.runAndWait()
+                    search = Argsearch6(order[1], order[2], order[3], order[4], order[5], order[6])
+                    search.search()
+                elif len(order) == 8:
+                    engine.say('buscando')
+                    engine.runAndWait()
+                    search = Argsearch7(order[1], order[2], order[3], order[4], order[5], order[6], order[7])
+                    search.search()
+        
 
 
     except Exception as ex:
-        error_log(ex)
+        ex_handler.error_log(ex)
         _orders_()
+
 
 
 def initial_voice():
@@ -102,30 +213,36 @@ def _welcome_():  # FUNCIÓN DE LOOP PARA INICIAR EL ASISTENTE AL DECIR "ABRIR"
             recognizer.dynamic_energy_threshold = False
             print('Ajustando ruido del ambiente')
             recognizer.adjust_for_ambient_noise(source, duration=3)
-            print('\nListo!')
-            initial_audio = recognizer.listen(source, timeout=10)
+            print('\nListo!\n')
         except Exception as ex:
-            error_log(ex)
+            ex_handler.error_log(ex)
             _welcome_()
-        try:
-            open_command = recognizer.recognize_google(
-                initial_audio, language="es-ES")  # Recognized text
-            open_command = re.sub(r'[^\w\s]', '', str(open_command)) # this line delete all quotation marks
-            #ls_ = open_command.split(" ")  # Creates a list
-            order = open_command.lower()
-            #unidecode.unidecode(order)
-            print(order)
-            reader_ = reader('init.txt')
-            if order in reader_:
-                ambient_adjustement()
-                initial_voice()
-        except Exception as ex:
-            error_log(ex)
-            _welcome_()
+        def recong():
+            try:
+                initial_audio = recognizer.listen(source, timeout=50)
+                open_command = recognizer.recognize_google(
+                    initial_audio, language="es-ES")  # Recognized text
+                open_command = re.sub(r'[^\w\s]', '', str(open_command)) # this line delete all quotation marks
+                order = open_command.lower()
+                order = unidecode.unidecode(order)
+                order = order.split(' ')
+                for i in reader('init.txt'):
+                    i = str(i).split(' ')
+                    res = any(item in i for item in order)
+                    if res == True:
+                        ambient_adjustement()
+                        initial_voice()
+            except Exception as ex:
+                ex_handler.error_log(ex)
+                recong()
+        recong()
 
-
+count = 0
 while 1:
-    _welcome_()
+    if count < 1:
+        _welcome_()
+        count += 1
+    _orders_()
 
 
 
