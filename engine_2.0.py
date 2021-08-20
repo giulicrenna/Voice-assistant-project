@@ -212,7 +212,8 @@ def _orders_():
                     ex_handler.error_log(ex)
         for i in reader('jokes.txt'):
             if i in order:
-                string = jokes.jokes()
+                num = random.randint(1, 9)
+                string = jokes.jokes(num)
                 print(string)
                 engine.say(string)
                 engine.runAndWait()

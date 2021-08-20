@@ -1,8 +1,6 @@
 import sqlite3
-import os, sys
 import pandas as pd
-import time
-from modules import ex_handler
+from . import ex_handler
 # def erase_all():
 #     conn = sqlite3.connect('notes_db.s3db')
 #     cursor = conn.cursor()
@@ -60,10 +58,10 @@ class Notes():
 
 
 
-conn = sqlite3.connect('notes_db.s3db')
-cursor = conn.cursor()
-select_ = cursor.execute("SELECT * FROM notes")
-count = 1
-for i in select_:
-    count += 1
-del_id_ = 2
+# conn = sqlite3.connect('notes_db.s3db')
+# cursor = conn.cursor()
+# select_ = cursor.execute("SELECT * FROM notes")
+# count = 1
+# for i in select_:
+#     count += 1
+# del_id_ = 2
