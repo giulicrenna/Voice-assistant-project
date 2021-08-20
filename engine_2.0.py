@@ -207,12 +207,28 @@ def _orders_():
                 try:
                     engine.say('Prendiendo relé dos')
                     engine.runAndWait()
+                    driver.controller('ON2')
+                except Exception as ex:
                     ex_handler.error_log(ex)
+        for i in reader('opto1_off.txt'):
+            if i in order:
+                try:
+                    engine.say('Apagando relé uno')
+                    engine.runAndWait()
+                    driver.controller('OFF1')
+                except Exception as ex:
+                    ex_handler.error_log(ex)
+        for i in reader('opto2_off.txt'):
+            if i in order:
+                try:
+                    engine.say('Apagando relé dos')
+                    engine.runAndWait()
+                    driver.controller('OFF2')
                 except Exception as ex:
                     ex_handler.error_log(ex)
         for i in reader('jokes.txt'):
             if i in order:
-                num = random.randint(1, 9)
+                num = random.randint(1, 23)
                 string = jokes.jokes(num)
                 print(string)
                 engine.say(string)
@@ -269,6 +285,6 @@ def _welcome_():  # FUNCIÓN DE LOOP PARA INICIAR EL ASISTENTE AL DECIR "ABRIR"
 _welcome_()
 
 
-
+#add radio station
 # Remember to compare the order (a string) with
 # reader_ (a list), and create a .txt per function

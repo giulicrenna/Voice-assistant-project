@@ -1,5 +1,3 @@
-from hashlib import new
-import random
 import os
 
 
@@ -13,4 +11,3 @@ def jokes(num):
     text = file.readlines()
     new_text = empty_str.join(text[num])
     return new_text
-

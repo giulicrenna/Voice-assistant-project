@@ -1,12 +1,19 @@
 import serial, time
-from modules import ex_handler
+import os
+# from modules import ex_handler
+
+path = os.getcwd()
+path = os.path.join(path, "modules", "config.txt")
+config = open(path, "rt")
+data = config.readlines(2)
+data = str(data[1])
 
 try:
     try:
-        serial_port = serial.Serial('COM3', 9600)
+        serial_port = serial.Serial(data, 9600)
         time.sleep(2)
     except Exception as e:
-        ex_handler.error_log(e)
+        # ex_handler.error_log(e)
         pass
 
 
@@ -49,5 +56,5 @@ try:
     controller('OFF1')
 
 except Exception as e:
-    ex_handler.error_log(e)
-
+    # ex_handler.error_log(e)
+    pass

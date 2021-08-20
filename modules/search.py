@@ -1,5 +1,5 @@
 import wikipedia as wk
-import os, sys
+import os
 import time
 import pyttsx3
 
