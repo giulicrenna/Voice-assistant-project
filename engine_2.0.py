@@ -1,6 +1,5 @@
 import speech_recognition as sr
 import pyttsx3
-#import subprocess
 import os
 import sys
 import time
@@ -13,7 +12,10 @@ from modules import reader
 from modules.reader import reader
 from modules.search import *
 from modules import climate
+from modules import driver
+from modules import jokes
 import random
+#import subprocess
 
 owner = 'giuli'
 
@@ -43,23 +45,27 @@ def ambient_adjustement():
         engine.say(sentence)         # Implement pre build sentences
         engine.runAndWait()
         recognizer.adjust_for_ambient_noise(source, duration=2)
+
 def list_to_str(list_):
     empty = ""
     for i in list_:
         empty += i
     return empty
 
-
 def _orders_():
-    with sr.Microphone() as source:
-        recorded_audio = recognizer.listen(source, timeout=3)
+    try:
+        with sr.Microphone() as source:
+            recorded_audio = recognizer.listen(source)
+    except Exception as ex:
+        print(ex)
+        ex_handler.error_log(ex)
+        _orders_()
     try:
         cleaner()
         order_ = recognizer.recognize_google(recorded_audio, language="es-Es")
         order_ = re.sub(r'[^\w\s]', '', str(order_))  #Mistake was not converting the order from a list  to a string
         order = order_.lower()
         order = unidecode.unidecode(order)
-        print(order)
         for i in reader('insult.txt'):
             if i in order:
                 engine.say("callate puto de mierda")
@@ -143,56 +149,78 @@ def _orders_():
                 engine.runAndWait()
                 time.sleep(3)
                 cleaner()
-        for i in reader('search.txt'):
-            order = order.replace('de ', '', 1)
-            order = order.replace('es ', '', 1)
-            order = order.split(" ")
-            print(order)
-            time.sleep(5)
+        for i in reader('search.txt'):                       # Fix the search function
             if i in order:
-                if len(order) == 2:
-                    engine.say('buscando')
+                order = order.replace('de', '', 1)
+                order = order.replace('es', '', 1)
+                order = order.split()
+                try:
+                    if len(order) == 2:
+                        engine.say('buscando')
+                        engine.runAndWait()
+                        search = Argsearch1(order[1])
+                        search.search()
+                    elif len(order) == 3:
+                        engine.say('buscando')
+                        engine.runAndWait()
+                        search = Argsearch2(order[1], order[2])
+                        search.search()
+                    elif len(order) == 4:
+                        engine.say('buscando')
+                        engine.runAndWait()
+                        search = Argsearch3(order[1], order[2], order[3])
+                        search.search()
+                    elif len(order) == 5:
+                        engine.say('buscando')
+                        engine.runAndWait()
+                        search = Argsearch4(order[1], order[2], order[3], order[4])
+                        search.search()
+                    elif len(order) == 6:
+                        engine.say('buscando')
+                        engine.runAndWait()
+                        search = Argsearch5(order[1], order[2], order[3], order[4], order[5])
+                        search.search()
+                    elif len(order) == 7:
+                        engine.say('buscando')
+                        engine.runAndWait()
+                        search = Argsearch6(order[1], order[2], order[3], order[4], order[5], order[6])
+                        search.search()
+                    elif len(order) == 8:
+                        engine.say('buscando')
+                        engine.runAndWait()
+                        search = Argsearch7(order[1], order[2], order[3], order[4], order[5], order[6], order[7])
+                        search.search()
+                except Exception as e:
+                    engine.say('Lo siento, pero no se puede realizar la búsqueda...')
                     engine.runAndWait()
-                    search = Argsearch1(order[1])
-                    search.search()
-                elif len(order) == 3:
-                    engine.say('buscando')
+                    ex_handler.error_log(e)
+        for i in reader('opto1.txt'):
+            if i in order:
+                try:
+                    engine.say('Prendiendo relé uno')
                     engine.runAndWait()
-                    search = Argsearch2(order[1], order[2])
-                    search.search()
-                elif len(order) == 4:
-                    engine.say('buscando')
+                    driver.controller('ON1')
+                except Exception as ex:
+                    ex_handler.error_log(ex)
+        for i in reader('opto2.txt'):
+            if i in order:
+                try:
+                    engine.say('Prendiendo relé dos')
                     engine.runAndWait()
-                    search = Argsearch3(order[1], order[2], order[3])
-                    search.search()
-                elif len(order) == 5:
-                    engine.say('buscando')
-                    engine.runAndWait()
-                    search = Argsearch4(order[1], order[2], order[3], order[4])
-                    search.search()
-                elif len(order) == 6:
-                    engine.say('buscando')
-                    engine.runAndWait()
-                    search = Argsearch5(order[1], order[2], order[3], order[4], order[5])
-                    search.search()
-                elif len(order) == 7:
-                    engine.say('buscando')
-                    engine.runAndWait()
-                    search = Argsearch6(order[1], order[2], order[3], order[4], order[5], order[6])
-                    search.search()
-                elif len(order) == 8:
-                    engine.say('buscando')
-                    engine.runAndWait()
-                    search = Argsearch7(order[1], order[2], order[3], order[4], order[5], order[6], order[7])
-                    search.search()
-        
-
+                    ex_handler.error_log(ex)
+                except Exception as ex:
+                    ex_handler.error_log(ex)
+        for i in reader('jokes.txt'):
+            if i in order:
+                string = jokes.jokes()
+                print(string)
+                engine.say(string)
+                engine.runAndWait()
+                time.sleep(2)
 
     except Exception as ex:
         ex_handler.error_log(ex)
         _orders_()
-
-
 
 def initial_voice():
     pre_build = open(os.getcwd() + r'\libs\pre_build_sentences.txt')
@@ -237,12 +265,7 @@ def _welcome_():  # FUNCIÓN DE LOOP PARA INICIAR EL ASISTENTE AL DECIR "ABRIR"
                 recong()
         recong()
 
-count = 0
-while 1:
-    if count < 1:
-        _welcome_()
-        count += 1
-    _orders_()
+_welcome_()
 
 
 

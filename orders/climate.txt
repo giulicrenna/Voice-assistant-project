@@ -2,6 +2,7 @@ dar el clima
 cuantos grados hace
 que temperatura hace
 como esta el clima
+cual es la temperatura
 como esta el cielo
 dime la temperatura
 dime el clima

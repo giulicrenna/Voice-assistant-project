@@ -2,5 +2,7 @@ pyttsx3
 SpeechRecognition
 pandas
 wikipedia
-pyaudio
 python-weather
+unidecode
+serial
+pyserial

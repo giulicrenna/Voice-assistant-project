@@ -1,0 +1,6 @@
+prender motor uno
+encender motor uno
+motor uno
+prender motor 1
+encender motor 1
+motor 1

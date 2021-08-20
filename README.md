@@ -9,6 +9,8 @@ sudo apt-get install espeak portaudio19-dev
 ```
 
 Create python env directory and install requirements
+
+For windows installation execute win_dep.bat
 ```
 virtualenv env
 source ./env/bin/activate
