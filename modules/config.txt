@@ -1,2 +1,2 @@
-
+#Line two configures the arduino connection port
 COM6

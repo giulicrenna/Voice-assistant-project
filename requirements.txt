@@ -4,5 +4,6 @@ pandas
 wikipedia
 python-weather
 unidecode
+progress
 serial
 pyserial

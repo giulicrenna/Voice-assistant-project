@@ -1,3 +1,4 @@
+import progress
 import serial, time
 import os
 # from modules import ex_handler
@@ -5,8 +6,9 @@ import os
 path = os.getcwd()
 path = os.path.join(path, "modules", "config.txt")
 config = open(path, "rt")
-data = config.readlines(2)
+data = config.readlines()
 data = str(data[1])
+print(data)
 
 try:
     try:

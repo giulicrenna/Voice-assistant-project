@@ -4,7 +4,8 @@ import os
 import sys
 import time
 import re
-import unidecode 
+import unidecode
+import random
 from modules import opener
 from modules import notes
 from modules import ex_handler
@@ -12,14 +13,11 @@ from modules import reader
 from modules.reader import reader
 from modules.search import *
 from modules import climate
-from modules import driver
 from modules import jokes
-import random
-#import subprocess
+from progress.bar import ChargingBar
+
 
 owner = 'giuli'
-
-
 
 n = random.randint(140, 160)
 
@@ -35,17 +33,22 @@ def cleaner():
     os.system('cls')
 
 def ambient_adjustement():
+    engine.say('Ajustando ruido del ambiente')
+    engine.runAndWait()
     with sr.Microphone() as source:
-        recognizer.dynamic_energy_threshold = False
-        # print(actual_path)
-        pre_build = open(os.getcwd() + r'\libs\pre_build_sentences.txt')
-        sentences = pre_build.readlines()
-        sentence = sentences[random.randint(2, 5)]
-        print(sentence)
-        engine.say(sentence)         # Implement pre build sentences
-        engine.runAndWait()
-        recognizer.adjust_for_ambient_noise(source, duration=2)
-
+        with ChargingBar('Ajustando ruido del ambiente >>', max=20) as bar:
+            for i in range(20):
+                time.sleep(0.1)
+                bar.next()
+            recognizer.dynamic_energy_threshold = False
+            recognizer.adjust_for_ambient_noise(source, duration=6)
+            pre_build = open(os.getcwd() + r'\libs\pre_build_sentences.txt')
+            sentences = pre_build.readlines()
+            sentence = sentences[random.randint(2, 5)]
+            print('\n{}'.format(sentence))
+            engine.say(sentence)         # Implement pre build sentences
+            engine.runAndWait()
+            
 def list_to_str(list_):
     empty = ""
     for i in list_:
@@ -194,38 +197,17 @@ def _orders_():
                     engine.say('Lo siento, pero no se puede realizar la búsqueda...')
                     engine.runAndWait()
                     ex_handler.error_log(e)
-        for i in reader('opto1.txt'):
+        for i in reader('control_mode.txt'):
             if i in order:
+                engine.say('Iniciando modo controlador')
+                engine.runAndWait()
                 try:
-                    engine.say('Prendiendo relé uno')
-                    engine.runAndWait()
-                    driver.controller('ON1')
-                except Exception as ex:
-                    ex_handler.error_log(ex)
-        for i in reader('opto2.txt'):
-            if i in order:
-                try:
-                    engine.say('Prendiendo relé dos')
-                    engine.runAndWait()
-                    driver.controller('ON2')
-                except Exception as ex:
-                    ex_handler.error_log(ex)
-        for i in reader('opto1_off.txt'):
-            if i in order:
-                try:
-                    engine.say('Apagando relé uno')
-                    engine.runAndWait()
-                    driver.controller('OFF1')
-                except Exception as ex:
-                    ex_handler.error_log(ex)
-        for i in reader('opto2_off.txt'):
-            if i in order:
-                try:
-                    engine.say('Apagando relé dos')
-                    engine.runAndWait()
-                    driver.controller('OFF2')
-                except Exception as ex:
-                    ex_handler.error_log(ex)
+                    path = os.getcwd()
+                    path = os.path.join(path, 'control_mode.py')
+                    os.system('py {}'.format(path))
+                    exit()
+                except Exception as e:
+                    ex_handler.error_log(e)
         for i in reader('jokes.txt'):
             if i in order:
                 num = random.randint(1, 23)
@@ -282,7 +264,10 @@ def _welcome_():  # FUNCIÓN DE LOOP PARA INICIAR EL ASISTENTE AL DECIR "ABRIR"
                 recong()
         recong()
 
-_welcome_()
+# _welcome_()
+ambient_adjustement()
+time.sleep(3)
+initial_voice()
 
 
 #add radio station
