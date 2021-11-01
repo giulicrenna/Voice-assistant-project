@@ -1,0 +1,5 @@
+ver noticias
+mostrar noticias 
+decir noticias
+mostrame las noticias
+muestrame las noticias

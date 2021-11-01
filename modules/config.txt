@@ -1,0 +1,10 @@
+#Line two configures the arduino connection port
+COM6
+#Line four configure gTTS language (es, en, ar) for more languages execute "gtts-cli --all"
+es
+#Line six configure your actual city
+casilda
+#Next lines (8, 9, 10) are reserved for rss channels
+https://www.clarin.com/rss/lo-ultimo/
+https://www.clarin.com/rss/politica/
+https://www.clarin.com/rss/mundo/

@@ -5,6 +5,7 @@
 
 External dependencies
 ```
+mp3-decoder
 sudo apt-get install espeak portaudio19-dev
 ```
 

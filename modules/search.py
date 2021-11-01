@@ -1,7 +1,7 @@
 import wikipedia as wk
-import os, sys
+import os
 import time
-import pyttsx3
+from modules.gtt_voice import say
 
 def error_log2(exception_):
     named = time.localtime() 
@@ -19,12 +19,10 @@ class Argsearch1:
     def search(self):
         try:
             wk.set_lang('es')
-            inf = wk.summary(self.arg, sentences=7)
+            inf = wk.summary(self.arg, sentences=2)
             print(inf)
-            engine = pyttsx3.init()
-            engine.say(inf)
-            engine.runAndWait()
-            input()
+            say(inf)       
+            
         except Exception as e:
             error_log2(e)
             print('No hay coincidencia de busqueda')
@@ -38,12 +36,10 @@ class Argsearch2:
         try:
             wk.set_lang('es')
             inf = wk.summary(self.arg + ' ' + self.arg2, 
-            sentences=7)
+            sentences=2)
             print(inf)
-            engine = pyttsx3.init()
-            engine.say(inf)
-            engine.runAndWait()
-            input()
+            say(inf)
+            
         except Exception as e:
             error_log2(e)
             print('No hay coincidencia de busqueda')
@@ -58,13 +54,10 @@ class Argsearch3:
         try:
             wk.set_lang('es')
             inf = wk.summary(self.arg + ' ' + self.arg2 + ' ' + self.arg3,
-            sentences=7)
+            sentences=2)
             print(inf)
-            engine = pyttsx3.init()
-            engine.say(inf)
-            engine.runAndWait()
-            engine.runAndWait()
-            input()
+            say(inf)
+            
         except Exception as e:
             error_log2(e)
             print('No hay coincidencia de busqueda')
@@ -80,12 +73,10 @@ class Argsearch4:
         try:
             wk.set_lang('es')
             inf = wk.summary(self.arg + ' ' + self.arg2 + ' ' + self.arg3 + ' ' + self.arg4,
-            sentences=7)
+            sentences=2)
             print(inf)
-            engine = pyttsx3.init()
-            engine.say(inf)
-            engine.runAndWait()
-            input()
+            say(inf)
+            
         except Exception as e:
             error_log2(e)
             print('No hay coincidencia de busqueda')
@@ -102,13 +93,11 @@ class Argsearch5:
         try:
             wk.set_lang('es')
             inf = wk.summary(self.arg + ' ' + self.arg2 + ' ' + self.arg3 + ' ' + self.arg4 + ' ' + self.arg5,
-            sentences=7)
+            sentences=2)
             print(inf)
-            engine = pyttsx3.init()
             inf = str(inf)
-            engine.say('{}'.format(inf))
-            engine.runAndWait()
-            input()
+            say('{}'.format(inf))
+            
         except Exception as e:
             error_log2(e)
             print('No hay coincidencia de busqueda')
@@ -126,12 +115,10 @@ class Argsearch6:
         try:
             wk.set_lang('es')
             inf = wk.summary(self.arg + ' ' + self.arg2 + ' ' + self.arg3 + ' ' + self.arg4 + ' ' + self.arg5 + ' ' + self.arg6,
-            sentences=7)
+            sentences=2)
             print(inf)
-            engine = pyttsx3.init()
-            engine.say(inf)
-            engine.runAndWait()
-            input()
+            say(inf)
+            
         except Exception as e:
             error_log2(e)
             print('No hay coincidencia de busqueda')
@@ -150,12 +137,10 @@ class Argsearch7:
         try:
             wk.set_lang('es')
             inf = wk.summary(self.arg + ' ' + self.arg2 + ' ' + self.arg3 + ' ' + self.arg4 + ' ' + self.arg5 + ' ' + self.arg6 + ' ' + self.arg7,
-            sentences=7)
+            sentences=2)
             print(inf)
-            engine = pyttsx3.init()
-            engine.say(inf)
-            engine.runAndWait()
-            input()
+            say(inf)
+            
         except Exception as e:
             error_log2(e)
             print('No hay coincidencia de busqueda')

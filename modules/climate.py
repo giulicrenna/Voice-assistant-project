@@ -41,6 +41,5 @@ class Weather:
 
             else: 
                 return "Ciudad no encontrada"
-                time.sleep(3)
         except Exception as ex:
             error_log(ex)

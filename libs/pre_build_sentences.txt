@@ -1,7 +1,7 @@
 {
-muy buenos dias giuli
-hola giuli, como te va?
-buenas tardes, como te va
+muy buenos días giuli
+hola giuli, cómo te va?
+buenas tardes, cómo te va
 bienvenido giuli
 que gusto verte de nuevo
 }
@@ -9,9 +9,9 @@ que gusto verte de nuevo
 
 {
 ordeneme algo por favor
-digame que quiere que haga
-estoy a su entera disposicion
-por favor, digame que puedo hacer por usted
+dígame que quiere que haga
+estoy a su entera disposición
+por favor, dígame que puedo hacer por usted
 }
 
 
@@ -20,7 +20,7 @@ nos vemos
 a dios 
 fue un placer
 nos vemos, suerte 
-que tenga un buen dia
+que tenga un buen día
 chau
 chau
 }

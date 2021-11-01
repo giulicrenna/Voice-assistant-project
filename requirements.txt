@@ -1,8 +1,12 @@
-pyttsx3
+beepy
 SpeechRecognition
 pandas
 wikipedia
+gtts
 python-weather
 unidecode
+progress
 serial
 pyserial
+pyaudio
+feedparser
