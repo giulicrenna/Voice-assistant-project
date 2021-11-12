@@ -7,17 +7,12 @@ External dependencies
 ```
 mp3-decoder
 sudo apt-get install espeak portaudio19-dev
+sudo apt-get install flac
+sudo apt-get install python3-pyaudio
+sudo apt-get install libatlas-basedev
 ```
 
 Create python env directory and install requirements
-
-For windows installation execute win_dep.bat
-```
-virtualenv env
-source ./env/bin/activate
-pip install -r requirements.txt
-```
-
 
 ### Executing
 
