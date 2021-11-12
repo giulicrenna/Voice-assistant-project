@@ -1,7 +1,7 @@
 hola
-hola santi
-hola santi como te va
-hola santi como te va
+hola mica
+hola lisa como te va
+hola lisa como te va
 iniciar
 abrir programa
 buen dia
@@ -9,11 +9,10 @@ iniciate
 buenos dias
 buenas noches
 buenas tardes
-buenos dias santi
-buenas noches santi
-buenas tardes santi
-hola querido
-hola mi amor
-santi
-ey santi
-hey santi
+buenos dias lisa
+buenas noches lisa
+buenas tardes lisa
+mica
+ey mica
+hey mica
+Mica

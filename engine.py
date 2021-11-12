@@ -65,6 +65,7 @@ def _orders_():
         order_ = re.sub(r'[^\w\s]', '', str(order_))  #Mistake was not converting the order from a list  to a string
         order = order_.lower()
         order = unidecode.unidecode(order)
+        print(order)
         for i in reader('insult.txt'):
             if i in order:
                 say("callate puto de mierda")
@@ -80,7 +81,7 @@ def _orders_():
                 sentence = sentence[random.randint(19, 25)]
                 say(sentence)
                 
-                sys.exit()
+                os.system('shutdown')
         for i in reader('notes.txt'):  #Terminar notes
             #res = any(x in i for x in order_)
             if i in order:
@@ -148,7 +149,8 @@ def _orders_():
                 say(weather)
                 time.sleep(3)
                 cleaner()
-        for i in reader('search.txt'):                       # Fix the search function
+
+        for i in reader('search.txt'):                       
             if i in order:
                 order = order.replace('de', '', 1)
                 order = order.replace('es', '', 1)
@@ -186,6 +188,7 @@ def _orders_():
                     say('Lo siento, pero no se puede realizar la búsqueda...')
                     
                     ex_handler.error_log(e)
+                break
         for i in reader('control_mode.txt'):
             if i in order:
                 say('Iniciando modo controlador')
@@ -215,6 +218,10 @@ def _orders_():
             if i and 'politica' in order:
                 rss.rss_politics()
                 break
+        for i in reader('alarm.txt'):
+            if i in order:
+                os.system('python3.9 modules/alarm.py &')
+            break
     except Exception as ex:
         ex_handler.error_log(ex)
         pass
@@ -224,7 +231,7 @@ def trigger():  # FUNCIÓN DE LOOP PARA INICIAR EL ASISTENTE AL DECIR "ABRIR"
     with sr.Microphone() as source:
         def recong():
             try:
-                initial_audio = recognizer.listen(source, timeout=50)
+                initial_audio = recognizer.listen(source, timeout=5)
                 open_command = recognizer.recognize_google(
                     initial_audio, language="es-AR")  # Recognized text
                 open_command = re.sub(r'[^\w\s]', '', str(open_command)) # this line delete all quotation marks

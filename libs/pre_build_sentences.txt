@@ -24,3 +24,10 @@ que tenga un buen día
 chau
 chau
 }
+
+{
+algo
+Soy una asistente de voz personal, creada por giuliano Crenna, estoy hecha en python y aunque mi futuro es incierto, creo que voy por buen camino
+algo
+
+}

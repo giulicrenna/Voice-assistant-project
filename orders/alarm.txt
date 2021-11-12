@@ -1,0 +1,4 @@
+establecer alarma 
+poner alarma
+avisarme
+temporizador
